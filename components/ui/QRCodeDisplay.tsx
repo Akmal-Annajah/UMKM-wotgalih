@@ -18,16 +18,40 @@ export function QRCodeDisplay({ slug, umkmName }: QRCodeDisplayProps) {
 
   const downloadQR = () => {
     const canvas = document.getElementById('umkm-qr-code') as HTMLCanvasElement;
-    if (!canvas) return;
+    if (!canvas) {
+      toast.error('QR Code tidak ditemukan');
+      return;
+    }
 
-    const pngUrl = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-    let downloadLink = document.createElement('a');
-    downloadLink.href = pngUrl;
-    downloadLink.download = `QR-Code-${umkmName}.png`;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    toast.success('QR Code berhasil diunduh!');
+    try {
+      // Konversi canvas ke data URL langsung
+      const dataUrl = canvas.toDataURL('image/png');
+      
+      // Buat link download
+      const link = document.createElement('a');
+      link.download = `QR-Code-${umkmName}.png`;
+      link.href = dataUrl;
+      link.style.display = 'none';
+      
+      // Tambahkan ke body, klik, lalu hapus
+      document.body.appendChild(link);
+      link.click();
+      
+      // Delay penghapusan agar browser sempat memproses
+      setTimeout(() => {
+        document.body.removeChild(link);
+      }, 100);
+      
+      toast.success('QR Code berhasil diunduh!');
+    } catch {
+      // Fallback: buka gambar di tab baru agar user bisa save manual
+      const dataUrl = canvas.toDataURL('image/png');
+      const win = window.open();
+      if (win) {
+        win.document.write(`<img src="${dataUrl}" alt="QR Code" /><p>Klik kanan pada gambar lalu pilih "Save image as..." untuk menyimpan.</p>`);
+      }
+      toast.info('Gambar QR dibuka di tab baru. Klik kanan untuk menyimpan.');
+    }
   };
 
   const copyLink = async () => {
