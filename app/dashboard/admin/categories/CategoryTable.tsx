@@ -76,11 +76,9 @@ export function CategoryTable({ categories }: CategoryTableProps) {
   return (
     <div className="space-y-6">
       <Dialog open={addOpen} onOpenChange={setAddOpen}>
-        <DialogTrigger asChild>
-          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-            <Plus className="mr-2 h-4 w-4" /> Tambah Kategori
-          </Button>
-        </DialogTrigger>
+        <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setAddOpen(true)}>
+          <Plus className="mr-2 h-4 w-4" /> Tambah Kategori
+        </Button>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Tambah Kategori Baru</DialogTitle>

@@ -19,6 +19,8 @@ export async function toggleUMKMStatus(umkmId: string, isActive: boolean) {
   return { success: true };
 }
 
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+
 export async function createUMKMWithAccount(formData: FormData) {
   const supabase = await createClient();
 
@@ -39,8 +41,15 @@ export async function createUMKMWithAccount(formData: FormData) {
     .replace(/-+/g, '-')
     .trim();
 
+  // Create admin client using service_role_key
+  const adminAuthClient = createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } }
+  );
+
   // 1. Create auth user via Supabase Auth Admin (server-side)
-  const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+  const { data: authData, error: authError } = await adminAuthClient.auth.admin.createUser({
     email,
     password,
     email_confirm: true,
@@ -51,6 +60,9 @@ export async function createUMKMWithAccount(formData: FormData) {
   });
 
   if (authError) {
+    if (authError.message.includes('missing')) {
+       return { error: `SUPABASE_SERVICE_ROLE_KEY belum diset di .env.local` };
+    }
     return { error: `Gagal membuat akun: ${authError.message}` };
   }
 

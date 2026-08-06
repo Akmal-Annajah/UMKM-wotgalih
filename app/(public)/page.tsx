@@ -17,7 +17,7 @@ export default async function LandingPage() {
           <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-emerald-600/20 blur-3xl" />
           <div className="absolute top-1/2 right-0 h-80 w-80 -translate-y-1/2 translate-x-1/3 rounded-full bg-amber-500/20 blur-3xl" />
         </div>
-        
+
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-300 mb-8 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
@@ -57,7 +57,7 @@ export default async function LandingPage() {
           <h2 className="text-3xl font-bold tracking-tight text-slate-900">Kategori UMKM</h2>
           <p className="mt-4 text-slate-600">Temukan produk berdasarkan kategori yang tersedia.</p>
         </div>
-        
+
         {categories.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {categories.map((cat) => (
@@ -194,7 +194,7 @@ export default async function LandingPage() {
               </p>
               <div className="flex items-center gap-4 text-emerald-200">
                 <MapPin className="h-6 w-6" />
-                <span>Kecamatan Nguling, Kabupaten Pasuruan</span>
+                <span>Kecamatan Yosowilangun, Kabupaten Lumajang</span>
               </div>
             </div>
             <div className="hidden lg:block relative aspect-video rounded-2xl overflow-hidden bg-emerald-800 border border-emerald-700 shadow-xl">

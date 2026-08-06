@@ -6,13 +6,44 @@ export const loginSchema = z.object({
   password: z.string().min(6, { message: "Password minimal 6 karakter" }),
 });
 
+export const registerSchema = z.object({
+  fullName: z.string().min(3, { message: "Nama lengkap minimal 3 karakter" }),
+  email: z.string().email({ message: "Email tidak valid" }),
+  password: z.string().min(6, { message: "Password minimal 6 karakter" }),
+  confirmPassword: z.string()
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Password tidak cocok",
+  path: ["confirmPassword"],
+});
+
 export type LoginFormData = z.infer<typeof loginSchema>;
+export type RegisterFormData = z.infer<typeof registerSchema>;
 
 export async function loginWithEmail(data: LoginFormData) {
   const supabase = createClient();
   const { data: authData, error } = await supabase.auth.signInWithPassword({
     email: data.email,
     password: data.password,
+  });
+  
+  if (error) {
+    throw new Error(error.message);
+  }
+  
+  return authData;
+}
+
+export async function registerWithEmail(data: RegisterFormData) {
+  const supabase = createClient();
+  const { data: authData, error } = await supabase.auth.signUp({
+    email: data.email,
+    password: data.password,
+    options: {
+      data: {
+        full_name: data.fullName,
+        role: 'umkm',
+      }
+    }
   });
   
   if (error) {

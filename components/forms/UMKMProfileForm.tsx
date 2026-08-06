@@ -32,6 +32,9 @@ export function UMKMProfileForm({ umkm }: UMKMProfileFormProps) {
         address: formData.get('address') as string,
         whatsapp: formData.get('whatsapp') as string,
         instagram: formData.get('instagram') as string,
+        tiktok_url: formData.get('tiktok_url') as string,
+        shopee_url: formData.get('shopee_url') as string,
+        tokopedia_url: formData.get('tokopedia_url') as string,
         maps_url: formData.get('maps_url') as string,
       })
       .eq('id', umkm.id);
@@ -167,6 +170,14 @@ export function UMKMProfileForm({ umkm }: UMKMProfileFormProps) {
                 <Input id="instagram" name="instagram" defaultValue={umkm.instagram || ''} placeholder="https://instagram.com/nama_akun" />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="tiktok_url">Link TikTok</Label>
+                <Input id="tiktok_url" name="tiktok_url" defaultValue={umkm.tiktok_url || ''} placeholder="https://tiktok.com/@nama_akun" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="shopee_url">Link Toko Shopee</Label>
+                <Input id="shopee_url" name="shopee_url" defaultValue={umkm.shopee_url || ''} placeholder="https://shopee.co.id/nama_toko" />
+              </div>
+              <div className="space-y-2 md:col-span-2">
                 <Label htmlFor="maps_url">URL Google Maps</Label>
                 <Input id="maps_url" name="maps_url" defaultValue={umkm.maps_url || ''} placeholder="https://maps.google.com/..." />
               </div>

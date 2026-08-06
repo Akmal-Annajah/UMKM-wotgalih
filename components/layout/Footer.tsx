@@ -20,9 +20,9 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">Kontak</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              <li>Desa Wotgalih, Nguling</li>
-              <li>Pasuruan, Jawa Timur</li>
-              <li>Email: admin@wotgalih.desa.id</li>
+              <li>Desa Wotgalih, Yosowilangun</li>
+              <li>Lumajang, Jawa Timur</li>
+              <li>Email: kknwotgalih26@gmail.com</li>
             </ul>
           </div>
         </div>

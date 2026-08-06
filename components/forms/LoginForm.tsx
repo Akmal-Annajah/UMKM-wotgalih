@@ -44,7 +44,14 @@ export function LoginForm() {
         router.push('/dashboard/umkm')
       }
     } catch (error: any) {
-      setErrorMsg(error.message || 'Email atau password salah.')
+      const msg = error.message || ''
+      if (msg.includes('Email not confirmed')) {
+        setErrorMsg('Email belum dikonfirmasi. Silakan cek inbox email Anda atau hubungi admin.')
+      } else if (msg.includes('Invalid login credentials')) {
+        setErrorMsg('Email atau password salah.')
+      } else {
+        setErrorMsg(msg || 'Terjadi kesalahan saat login.')
+      }
     } finally {
       setIsLoading(false)
     }

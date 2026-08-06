@@ -1,7 +1,9 @@
 import { createClient } from '@/lib/supabase/server';
 import { getMyUMKM } from '@/services/umkm.service';
 import { UMKMProfileForm } from '@/components/forms/UMKMProfileForm';
+import { QRCodeDisplay } from '@/components/ui/QRCodeDisplay';
 import { AlertCircle } from 'lucide-react';
+import { redirect } from 'next/navigation';
 
 export const metadata = {
   title: 'Edit Profil - Dashboard UMKM',
@@ -13,24 +15,29 @@ export default async function UMKMProfilePage() {
   const umkm = user ? await getMyUMKM(user.id) : null;
 
   if (!umkm) {
-    return (
-      <div className="flex flex-col items-center justify-center py-24 text-center">
-        <AlertCircle className="h-16 w-16 text-amber-400 mb-6" />
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">Profil UMKM Belum Ditemukan</h1>
-        <p className="text-slate-500 max-w-md">
-          Akun Anda belum terhubung dengan data UMKM. Hubungi Admin.
-        </p>
-      </div>
-    );
+    redirect('/dashboard/umkm');
   }
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Edit Profil</h1>
-        <p className="mt-2 text-slate-500">Perbarui informasi, logo, dan banner UMKM Anda.</p>
+    <div className="max-w-4xl mx-auto py-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-slate-900">Profil UMKM</h1>
+        <p className="text-slate-500 mt-1">Kelola informasi publik dan QR Code untuk usaha Anda.</p>
       </div>
-      <UMKMProfileForm umkm={umkm} />
+      
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Main Form Column */}
+        <div className="lg:col-span-2">
+          <UMKMProfileForm umkm={umkm} />
+        </div>
+        
+        {/* Side Column (QR Code) */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-8">
+            <QRCodeDisplay slug={umkm.slug} umkmName={umkm.name} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import { Plus, Pencil, Trash2, ShoppingBag, ImagePlus, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PriceInput } from '@/components/ui/PriceInput';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
@@ -119,11 +120,9 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
     <div className="space-y-6">
       {/* Add Product Dialog */}
       <Dialog open={addOpen} onOpenChange={setAddOpen}>
-        <DialogTrigger asChild>
-          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-            <Plus className="mr-2 h-4 w-4" /> Tambah Produk
-          </Button>
-        </DialogTrigger>
+        <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setAddOpen(true)}>
+          <Plus className="mr-2 h-4 w-4" /> Tambah Produk
+        </Button>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>Tambah Produk Baru</DialogTitle>
@@ -135,7 +134,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="add_price">Harga (Rp) *</Label>
-              <Input id="add_price" name="price" type="number" required min="0" placeholder="10000" />
+              <PriceInput id="add_price" name="price" required placeholder="15.000" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="add_description">Deskripsi</Label>
@@ -165,7 +164,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="edit_price">Harga (Rp) *</Label>
-                <Input id="edit_price" name="price" type="number" required min="0" defaultValue={editingProduct.price} />
+                <PriceInput id="edit_price" name="price" required defaultValue={editingProduct.price} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="edit_description">Deskripsi</Label>

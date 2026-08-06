@@ -71,11 +71,9 @@ export function UMKMTable({ umkms, categories }: UMKMTableProps) {
   return (
     <div className="space-y-6">
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-            <Plus className="mr-2 h-4 w-4" /> Daftarkan UMKM Baru
-          </Button>
-        </DialogTrigger>
+        <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setOpen(true)}>
+          <Plus className="mr-2 h-4 w-4" /> Daftarkan UMKM Baru
+        </Button>
         <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Daftarkan UMKM Baru</DialogTitle>

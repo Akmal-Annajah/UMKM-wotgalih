@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, UserCircle, ShoppingBag, LogOut } from 'lucide-react';
+import { LayoutDashboard, UserCircle, ShoppingBag, LogOut, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { logout } from '@/services/auth.service';
@@ -11,6 +11,7 @@ const menuItems = [
   { name: 'Dashboard', href: '/dashboard/umkm', icon: LayoutDashboard },
   { name: 'Edit Profil', href: '/dashboard/umkm/profile', icon: UserCircle },
   { name: 'Kelola Produk', href: '/dashboard/umkm/products', icon: ShoppingBag },
+  { name: 'Pengaturan', href: '/dashboard/umkm/settings', icon: Settings },
 ];
 
 export function UMKMSidebar() {

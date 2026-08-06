@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { MapPin, Phone, Globe, Map, Store, ShoppingBag } from 'lucide-react';
+import { MapPin, Phone, Globe, Map, Store, ShoppingBag, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getUMKMBySlug } from '@/services/public.service';
@@ -34,7 +34,8 @@ export default async function UMKMDetailPage({ params }: { params: Promise<{ slu
     return cleaned;
   };
 
-  const waLink = umkm.whatsapp ? `https://wa.me/${formatWA(umkm.whatsapp)}` : null;
+  const waMessage = encodeURIComponent(`Halo Admin ${umkm.name}, saya ingin bertanya seputar produk UMKM Anda.`);
+  const waLink = umkm.whatsapp ? `https://api.whatsapp.com/send?phone=${formatWA(umkm.whatsapp)}&text=${waMessage}` : null;
 
   return (
     <div className="min-h-screen bg-slate-50 pb-24">
@@ -44,10 +45,17 @@ export default async function UMKMDetailPage({ params }: { params: Promise<{ slu
         ) : (
           <div className="h-full w-full bg-gradient-to-r from-emerald-700 to-emerald-900" />
         )}
+        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10">
+          <Link href="/umkm">
+            <Button variant="ghost" className="text-slate-900 bg-white/80 hover:bg-white backdrop-blur-md shadow-sm">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Kembali
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative -mt-16 sm:-mt-24 mb-12 flex flex-col sm:flex-row gap-6 sm:items-end">
+        <div className="relative -mt-12 sm:-mt-20 mb-12 flex flex-col sm:flex-row gap-6 sm:items-end">
           <div className="h-32 w-32 sm:h-40 sm:w-40 shrink-0 rounded-2xl border-4 border-white bg-white shadow-lg overflow-hidden">
             {umkm.logo_url ? (
               <img src={umkm.logo_url} alt={`Logo ${umkm.name}`} className="h-full w-full object-cover" />
@@ -69,18 +77,33 @@ export default async function UMKMDetailPage({ params }: { params: Promise<{ slu
                 <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900">{umkm.name}</h1>
               </div>
               
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mt-4 sm:mt-0">
                 {waLink && (
                   <a href={waLink} target="_blank" rel="noopener noreferrer">
-                    <Button className="bg-[#25D366] hover:bg-[#1ebd5a] text-white">
+                    <Button className="bg-[#25D366] hover:bg-[#1ebd5a] text-white font-semibold">
                       <Phone className="mr-2 h-4 w-4" /> WhatsApp
                     </Button>
                   </a>
                 )}
                 {umkm.instagram && (
                   <a href={umkm.instagram} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" className="border-pink-200 text-pink-600 hover:bg-pink-50">
-                      <Globe className="h-4 w-4" />
+                    <Button variant="outline" className="border-pink-200 text-pink-600 hover:bg-pink-50 font-semibold">
+                      <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                      </svg>
+                      Instagram
+                    </Button>
+                  </a>
+                )}
+                {umkm.tiktok_url && (
+                  <a href={umkm.tiktok_url} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="border-slate-200 text-slate-900 hover:bg-slate-100 font-semibold">
+                      <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                      </svg>
+                      TikTok
                     </Button>
                   </a>
                 )}

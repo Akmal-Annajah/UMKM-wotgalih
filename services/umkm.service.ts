@@ -6,7 +6,7 @@ export async function getMyUMKM(userId: string) {
     .from('umkms')
     .select('*, categories(name)')
     .eq('profile_id', userId)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error('Error fetching my umkm:', error);

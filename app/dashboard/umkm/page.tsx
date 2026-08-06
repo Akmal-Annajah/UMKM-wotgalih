@@ -2,8 +2,10 @@ import { ShoppingBag, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { createClient } from '@/lib/supabase/server';
 import { getMyUMKM, getMyProductCount } from '@/services/umkm.service';
+import { getCategories } from '@/services/public.service';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { CreateUMKMForm } from '@/components/forms/CreateUMKMForm';
 
 export const metadata = {
   title: 'Dashboard UMKM',
@@ -15,14 +17,10 @@ export default async function UMKMDashboardPage() {
   const umkm = user ? await getMyUMKM(user.id) : null;
   const productCount = umkm ? await getMyProductCount(umkm.id) : 0;
 
-  if (!umkm) {
+  if (!umkm && user) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-center">
-        <AlertCircle className="h-16 w-16 text-amber-400 mb-6" />
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">Profil UMKM Belum Ditemukan</h1>
-        <p className="text-slate-500 max-w-md">
-          Akun Anda belum terhubung dengan data UMKM. Hubungi Admin untuk mendaftarkan usaha Anda.
-        </p>
+      <div className="max-w-4xl mx-auto py-8">
+        <CreateUMKMForm profileId={user.id} />
       </div>
     );
   }

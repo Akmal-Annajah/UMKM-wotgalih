@@ -49,7 +49,7 @@ export async function getAllUMKMs(categorySlug?: string) {
   const supabase = await createClient();
   let query = supabase
     .from('umkms')
-    .select('id, name, slug, description, logo_url, categories!inner(name, slug)')
+    .select(`id, name, slug, description, logo_url, categories${categorySlug ? '!inner' : ''}(name, slug), products(id, name, price, image_url, slug, is_available)`)
     .eq('is_active', true);
 
   if (categorySlug) {

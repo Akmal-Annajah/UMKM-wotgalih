@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { getMyUMKM, getMyProducts } from '@/services/umkm.service';
 import { ProductTable } from './ProductTable';
 import { AlertCircle } from 'lucide-react';
+import { redirect } from 'next/navigation';
 
 export const metadata = {
   title: 'Kelola Produk - Dashboard UMKM',
@@ -13,15 +14,7 @@ export default async function UMKMProductsPage() {
   const umkm = user ? await getMyUMKM(user.id) : null;
 
   if (!umkm) {
-    return (
-      <div className="flex flex-col items-center justify-center py-24 text-center">
-        <AlertCircle className="h-16 w-16 text-amber-400 mb-6" />
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">Profil UMKM Belum Ditemukan</h1>
-        <p className="text-slate-500 max-w-md">
-          Akun Anda belum terhubung dengan data UMKM. Hubungi Admin.
-        </p>
-      </div>
-    );
+    redirect('/dashboard/umkm');
   }
 
   const products = await getMyProducts(umkm.id);

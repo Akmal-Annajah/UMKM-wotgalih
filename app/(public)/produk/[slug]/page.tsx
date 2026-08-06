@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Store, ShoppingBag, ArrowLeft } from 'lucide-react';
+import { Store, ShoppingBag, ArrowLeft, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { getProductBySlug } from '@/services/public.service';
@@ -41,15 +41,18 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const waMessage = encodeURIComponent(
     `Halo ${umkmName},\n\nSaya tertarik untuk membeli produk Anda:\n*${product.name}*\n(Rp ${new Intl.NumberFormat('id-ID').format(product.price)})\n\nApakah produk ini masih tersedia?`
   );
-  const waLink = waNumber ? `https://wa.me/${waNumber}?text=${waMessage}` : null;
+  const waLink = waNumber ? `https://api.whatsapp.com/send?phone=${waNumber}&text=${waMessage}` : null;
 
   return (
     <div className="min-h-screen bg-slate-50 py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <Link href="/produk" className="inline-flex items-center text-sm font-medium text-emerald-600 hover:text-emerald-700 mb-8 transition-colors">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Kembali ke Daftar Produk
-        </Link>
+        <div className="mb-6">
+          <Link href={`/umkm/${product.umkms?.slug}`}>
+            <Button variant="ghost" className="-ml-4 text-slate-500 hover:text-slate-900">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Kembali ke {umkmName}
+            </Button>
+          </Link>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white rounded-3xl p-6 sm:p-10 shadow-sm ring-1 ring-slate-200">
           
