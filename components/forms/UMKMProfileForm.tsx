@@ -198,6 +198,10 @@ export function UMKMProfileForm({ umkm }: UMKMProfileFormProps) {
                 <Label htmlFor="instagram">Link Instagram</Label>
                 <Input id="instagram" name="instagram" defaultValue={umkm.instagram || ''} placeholder="https://instagram.com/nama_akun" />
               </div>
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="Facebook">Link Facebook</Label>
+                <Input id="Facebook" name="Facebook" defaultValue={umkm.facebook || ''} placeholder="https://Facebook.com/" />
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="tiktok_url">Link TikTok</Label>
                 <Input id="tiktok_url" name="tiktok_url" defaultValue={umkm.tiktok_url || ''} placeholder="https://tiktok.com/@nama_akun" />
@@ -210,6 +214,7 @@ export function UMKMProfileForm({ umkm }: UMKMProfileFormProps) {
                 <Label htmlFor="maps_url">URL Google Maps</Label>
                 <Input id="maps_url" name="maps_url" defaultValue={umkm.maps_url || ''} placeholder="https://maps.google.com/..." />
               </div>
+
             </div>
             <div className="flex justify-end">
               <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={isLoading}>

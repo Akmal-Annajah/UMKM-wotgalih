@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent } from '@/components/ui/card'
 import { loginSchema, type LoginFormData, loginWithEmail } from '@/services/auth.service'
 import { createClient } from '@/lib/supabase/client'
+import Link from 'next/link'
 
 export function LoginForm() {
   const router = useRouter()
@@ -92,6 +93,14 @@ export function LoginForm() {
             {errors.password && (
               <p className="text-xs text-red-500">{errors.password.message}</p>
             )}
+            <div className="text-right">
+              <Link
+                href="/forgot-password"
+                className="text-xs font-medium text-blue-600 hover:text-blue-500"
+              >
+                Lupa Password?
+              </Link>
+            </div>
           </div>
 
           <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={isLoading}>
