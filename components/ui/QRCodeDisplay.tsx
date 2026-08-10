@@ -64,35 +64,35 @@ export function QRCodeDisplay({ slug, umkmName }: QRCodeDisplayProps) {
   };
 
   return (
-    <Card className="border-emerald-100 shadow-sm bg-gradient-to-b from-white to-emerald-50/30">
+    <Card className="border-blue-100 shadow-sm bg-gradient-to-b from-white to-blue-50/30">
       <CardHeader className="text-center pb-2">
-        <CardTitle className="text-xl text-emerald-900">QR Code Linktree</CardTitle>
+        <CardTitle className="text-xl text-blue-900">QR Code Linktree</CardTitle>
         <CardDescription>
           Cetak atau bagikan QR Code ini agar pelanggan bisa melihat semua link Anda.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col items-center space-y-6 pt-4">
-        <div className="p-4 bg-white rounded-2xl shadow-sm border border-emerald-100">
+        <div className="p-4 bg-white rounded-2xl shadow-sm border border-blue-100">
           <QRCodeCanvas 
             id="umkm-qr-code"
             value={linkUrl} 
             size={200}
             level="H"
             includeMargin={true}
-            fgColor="#064e3b" // emerald-900
+            fgColor="#064e3b" // blue-900
           />
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
           <Button 
-            className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm"
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
             onClick={downloadQR}
           >
             <Download className="mr-2 h-4 w-4" /> Unduh QR
           </Button>
           <Button 
             variant="outline" 
-            className="flex-1 border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+            className="flex-1 border-blue-200 text-blue-700 hover:bg-blue-50"
             onClick={copyLink}
           >
             <LinkIcon className="mr-2 h-4 w-4" /> Salin Link

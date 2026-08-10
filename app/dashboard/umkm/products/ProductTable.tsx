@@ -120,7 +120,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
     <div className="space-y-6">
       {/* Add Product Dialog */}
       <Dialog open={addOpen} onOpenChange={setAddOpen}>
-        <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setAddOpen(true)}>
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => setAddOpen(true)}>
           <Plus className="mr-2 h-4 w-4" /> Tambah Produk
         </Button>
         <DialogContent className="sm:max-w-lg">
@@ -142,7 +142,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
             </div>
             <div className="flex justify-end gap-3 pt-4 border-t">
               <Button type="button" variant="outline" onClick={() => setAddOpen(false)}>Batal</Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700" disabled={loading}>
+              <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
                 {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Menambahkan...</> : 'Tambah Produk'}
               </Button>
             </div>
@@ -179,7 +179,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
               </div>
               <div className="flex justify-end gap-3 pt-4 border-t">
                 <Button type="button" variant="outline" onClick={() => setEditOpen(false)}>Batal</Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700" disabled={loading}>
+                <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
                   {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Menyimpan...</> : 'Simpan Perubahan'}
                 </Button>
               </div>
@@ -234,7 +234,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
                     Rp {new Intl.NumberFormat('id-ID').format(product.price)}
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant={product.is_available ? 'default' : 'destructive'} className={product.is_available ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-100' : ''}>
+                    <Badge variant={product.is_available ? 'default' : 'destructive'} className={product.is_available ? 'bg-blue-100 text-blue-700 hover:bg-blue-100' : ''}>
                       {product.is_available ? 'Tersedia' : 'Habis'}
                     </Badge>
                   </TableCell>

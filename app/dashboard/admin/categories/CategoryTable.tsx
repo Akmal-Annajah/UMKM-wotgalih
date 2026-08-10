@@ -76,7 +76,7 @@ export function CategoryTable({ categories }: CategoryTableProps) {
   return (
     <div className="space-y-6">
       <Dialog open={addOpen} onOpenChange={setAddOpen}>
-        <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setAddOpen(true)}>
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => setAddOpen(true)}>
           <Plus className="mr-2 h-4 w-4" /> Tambah Kategori
         </Button>
         <DialogContent className="sm:max-w-md">
@@ -94,7 +94,7 @@ export function CategoryTable({ categories }: CategoryTableProps) {
             </div>
             <div className="flex justify-end gap-3 pt-4 border-t">
               <Button type="button" variant="outline" onClick={() => setAddOpen(false)}>Batal</Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700" disabled={loading}>
+              <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
                 {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Menyimpan...</> : 'Tambah Kategori'}
               </Button>
             </div>
@@ -119,7 +119,7 @@ export function CategoryTable({ categories }: CategoryTableProps) {
               </div>
               <div className="flex justify-end gap-3 pt-4 border-t">
                 <Button type="button" variant="outline" onClick={() => setEditOpen(false)}>Batal</Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700" disabled={loading}>
+                <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
                   {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Menyimpan...</> : 'Simpan Perubahan'}
                 </Button>
               </div>

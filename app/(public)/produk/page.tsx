@@ -37,10 +37,10 @@ export default async function ProductListPage({
               name="q"
               defaultValue={params.q}
               placeholder="Cari nama produk..." 
-              className="pl-10 border-slate-300 focus-visible:ring-emerald-500"
+              className="pl-10 border-slate-300 focus-visible:ring-blue-500"
             />
           </div>
-          <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+          <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">
             Cari
           </Button>
           {params.q && (
@@ -66,7 +66,7 @@ export default async function ProductListPage({
                   )}
                 </div>
                 <CardContent className="p-5">
-                  <p className="text-xs font-medium text-emerald-600 mb-1">
+                  <p className="text-xs font-medium text-blue-600 mb-1">
                     {(product.umkms as any)?.name}
                   </p>
                   <h3 className="text-lg font-bold text-slate-900 line-clamp-2">{product.name}</h3>

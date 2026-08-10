@@ -31,7 +31,7 @@ export default async function UMKMLayout({
     <div className="flex h-screen bg-slate-50 overflow-hidden flex-col md:flex-row pb-16 md:pb-0">
       {/* Top Bar for Mobile */}
       <div className="md:hidden flex h-16 items-center justify-between bg-white border-b border-slate-200 px-4 shrink-0">
-        <span className="text-xl font-bold text-slate-900">UMKM <span className="text-emerald-600">Panel</span></span>
+        <span className="text-xl font-bold text-slate-900">UMKM <span className="text-blue-600">Panel</span></span>
         <LogoutButton />
       </div>
 

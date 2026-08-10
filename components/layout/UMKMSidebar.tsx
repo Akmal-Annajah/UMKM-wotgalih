@@ -26,7 +26,7 @@ export function UMKMSidebar() {
   return (
     <div className="flex h-screen w-64 flex-col border-r border-slate-200 bg-white shrink-0">
       <div className="flex h-16 shrink-0 items-center border-b border-slate-200 px-6">
-        <span className="text-xl font-bold text-slate-900">UMKM <span className="text-emerald-600">Panel</span></span>
+        <span className="text-xl font-bold text-slate-900">UMKM <span className="text-blue-600">Panel</span></span>
       </div>
 
       <div className="flex flex-1 flex-col overflow-y-auto px-4 py-6">
@@ -40,10 +40,10 @@ export function UMKMSidebar() {
                 <span className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors my-1",
                   isActive
-                    ? "bg-emerald-50 text-emerald-700"
+                    ? "bg-blue-50 text-blue-700"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                 )}>
-                  <Icon className={cn("h-5 w-5", isActive ? "text-emerald-700" : "text-slate-400")} />
+                  <Icon className={cn("h-5 w-5", isActive ? "text-blue-700" : "text-slate-400")} />
                   {item.name}
                 </span>
               </Link>

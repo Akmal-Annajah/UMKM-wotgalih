@@ -30,14 +30,14 @@ export default async function UMKMListPage({
     <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-10 max-w-2xl">
         <Link href="/">
-          <Button variant="ghost" className="mb-6 -ml-4 text-slate-500 hover:text-slate-900">
+          <Button variant="ghost" className="mb-6 -ml-4 text-slate-500 hover:text-slate-900 rounded-full transition-all">
             <ArrowLeft className="mr-2 h-4 w-4" /> Kembali ke Beranda
           </Button>
         </Link>
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Katalog UMKM & Produk</h1>
         <p className="mt-4 text-lg text-slate-600">
           Jelajahi berbagai unit usaha dan produk unggulan yang ada di Desa Wotgalih.
-          {category && <span className="font-semibold text-emerald-600"> Kategori: {category}</span>}
+          {category && <span className="font-semibold text-blue-600"> Kategori: {category}</span>}
         </p>
       </div>
 
@@ -50,15 +50,15 @@ export default async function UMKMListPage({
               name="q"
               defaultValue={params.q}
               placeholder="Cari nama UMKM..." 
-              className="pl-10 border-slate-300 focus-visible:ring-emerald-500"
+              className="pl-10 border-slate-300 focus-visible:ring-blue-500"
             />
           </div>
-          <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+          <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 shadow-md transition-all hover:-translate-y-1">
             Cari
           </Button>
           {(params.q || category) && (
             <Link href="/umkm">
-              <Button variant="outline">Reset</Button>
+              <Button variant="outline" className="rounded-full px-6">Reset</Button>
             </Link>
           )}
         </form>
@@ -67,7 +67,7 @@ export default async function UMKMListPage({
       {filteredUmkms.length > 0 ? (
         <div className="flex flex-col gap-12">
           {filteredUmkms.map((umkm) => (
-            <div key={umkm.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col md:flex-row">
+            <div key={umkm.id} className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col md:flex-row transition-all hover:shadow-lg">
               {/* Profile UMKM (Kiri / Atas) */}
               <div className="md:w-1/3 p-6 md:p-8 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col">
                 <Link href={`/umkm/${umkm.slug}`} className="group inline-block">
@@ -82,9 +82,9 @@ export default async function UMKMListPage({
                       )}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-slate-900 group-hover:text-emerald-600 transition-colors line-clamp-2">{umkm.name}</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">{umkm.name}</h3>
                       {(umkm.categories as any)?.name && (
-                        <span className="inline-block mt-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
+                        <span className="inline-block mt-1 rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-700">
                           {(umkm.categories as any).name}
                         </span>
                       )}
@@ -96,7 +96,7 @@ export default async function UMKMListPage({
                 </p>
                 <div className="mt-auto pt-4">
                   <Link href={`/umkm/${umkm.slug}`}>
-                    <Button variant="outline" className="w-full border-emerald-200 text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800">
+                    <Button variant="outline" className="w-full rounded-full border-blue-200 text-blue-700 hover:bg-blue-50 hover:text-blue-800 transition-all">
                       Lihat Profil Lengkap
                     </Button>
                   </Link>
@@ -107,10 +107,10 @@ export default async function UMKMListPage({
               <div className="md:w-2/3 p-6 md:p-8">
                 <div className="flex items-center justify-between mb-6">
                   <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <ShoppingBag className="h-5 w-5 text-emerald-600" /> Katalog Produk
+                    <ShoppingBag className="h-5 w-5 text-blue-600" /> Katalog Produk
                   </h4>
                   {umkm.products && umkm.products.length > 3 && (
-                    <Link href={`/umkm/${umkm.slug}`} className="text-sm font-medium text-emerald-600 hover:text-emerald-700">
+                    <Link href={`/umkm/${umkm.slug}`} className="text-sm font-medium text-blue-600 hover:text-blue-700">
                       Lihat Semua ({umkm.products.length})
                     </Link>
                   )}
@@ -120,7 +120,7 @@ export default async function UMKMListPage({
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {umkm.products.slice(0, 3).map((product: any) => (
                       <Link key={product.id} href={`/produk/${product.slug}`}>
-                        <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-md border-slate-200 group">
+                        <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-slate-200 rounded-2xl group">
                           <div className="aspect-square bg-slate-100 relative">
                             {product.image_url ? (
                               <img src={product.image_url} alt={product.name} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" />

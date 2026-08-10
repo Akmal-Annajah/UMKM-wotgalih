@@ -75,7 +75,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {/* Product Details */}
           <div className="flex flex-col">
             <Link href={`/umkm/${product.umkms?.slug}`} className="inline-block mb-4 group w-fit">
-              <div className="flex items-center gap-3 rounded-full bg-slate-100 pr-4 pl-1.5 py-1.5 transition-colors group-hover:bg-emerald-50">
+              <div className="flex items-center gap-3 rounded-full bg-slate-100 pr-4 pl-1.5 py-1.5 transition-colors group-hover:bg-blue-50">
                 <div className="h-8 w-8 rounded-full overflow-hidden bg-white shrink-0">
                   {product.umkms?.logo_url ? (
                     <img src={product.umkms.logo_url} alt={umkmName} className="h-full w-full object-cover" />
@@ -85,7 +85,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     </div>
                   )}
                 </div>
-                <span className="text-sm font-semibold text-slate-700 group-hover:text-emerald-700">{umkmName}</span>
+                <span className="text-sm font-semibold text-slate-700 group-hover:text-blue-700">{umkmName}</span>
               </div>
             </Link>
 

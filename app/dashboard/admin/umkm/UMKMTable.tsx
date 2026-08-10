@@ -71,7 +71,7 @@ export function UMKMTable({ umkms, categories }: UMKMTableProps) {
   return (
     <div className="space-y-6">
       <Dialog open={open} onOpenChange={setOpen}>
-        <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => setOpen(true)}>
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => setOpen(true)}>
           <Plus className="mr-2 h-4 w-4" /> Daftarkan UMKM Baru
         </Button>
         <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
@@ -130,7 +130,7 @@ export function UMKMTable({ umkms, categories }: UMKMTableProps) {
 
             <div className="flex justify-end gap-3 pt-4 border-t">
               <Button type="button" variant="outline" onClick={() => setOpen(false)}>Batal</Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700" disabled={loading}>
+              <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
                 {loading ? 'Mendaftarkan...' : 'Daftarkan UMKM'}
               </Button>
             </div>
@@ -172,7 +172,7 @@ export function UMKMTable({ umkms, categories }: UMKMTableProps) {
                     )}
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant={umkm.is_active ? 'default' : 'destructive'} className={umkm.is_active ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-100' : ''}>
+                    <Badge variant={umkm.is_active ? 'default' : 'destructive'} className={umkm.is_active ? 'bg-blue-100 text-blue-700 hover:bg-blue-100' : ''}>
                       {umkm.is_active ? 'Aktif' : 'Nonaktif'}
                     </Badge>
                   </TableCell>

@@ -23,11 +23,11 @@ export function Navbar() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 transition-transform hover:scale-105 z-50">
-          <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-sm">
+          <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-blue-500 text-white shadow-sm">
             <Store className="h-5 w-5 sm:h-6 sm:w-6" />
           </div>
           <span className="text-lg sm:text-xl font-bold tracking-tight text-slate-900">
-            UMKM <span className="text-emerald-600">Wotgalih</span>
+            UMKM <span className="text-blue-600">Wotgalih</span>
           </span>
         </Link>
         
@@ -39,7 +39,7 @@ export function Navbar() {
               href={link.href} 
               className={cn(
                 "text-sm font-medium transition-colors",
-                pathname === link.href ? "text-emerald-600 font-bold" : "text-slate-600 hover:text-emerald-600"
+                pathname === link.href ? "text-blue-600 font-bold" : "text-slate-600 hover:text-blue-600"
               )}
             >
               {link.name}
@@ -50,7 +50,7 @@ export function Navbar() {
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-4">
           <Link href="/login">
-            <Button variant="outline" className="border-emerald-200 text-emerald-700 hover:bg-emerald-50">
+            <Button variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-50">
               Login Dashboard
             </Button>
           </Link>
@@ -59,7 +59,7 @@ export function Navbar() {
         {/* Mobile Menu Toggle */}
         <div className="flex items-center gap-2 md:hidden z-50">
           <Link href="/login" className="mr-1">
-            <Button size="sm" variant="outline" className="border-emerald-200 text-emerald-700 hover:bg-emerald-50 text-xs h-8 px-3">
+            <Button size="sm" variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-50 text-xs h-8 px-3">
               Login
             </Button>
           </Link>
@@ -82,7 +82,7 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className={cn(
                 "block py-2 text-base font-medium border-b border-slate-100",
-                pathname === link.href ? "text-emerald-600" : "text-slate-600"
+                pathname === link.href ? "text-blue-600" : "text-slate-600"
               )}
             >
               {link.name}
@@ -90,7 +90,7 @@ export function Navbar() {
           ))}
           <div className="pt-2">
             <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white h-12 text-base">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 text-base">
                 Login ke Dashboard
               </Button>
             </Link>

@@ -26,7 +26,7 @@ export function UMKMMobileNav() {
             <Link key={item.name} href={item.href} className="flex-1 flex justify-center">
               <div className={cn(
                 "flex flex-col items-center justify-center w-full h-full space-y-1",
-                isActive ? "text-emerald-600" : "text-slate-500 hover:text-slate-900"
+                isActive ? "text-blue-600" : "text-slate-500 hover:text-slate-900"
               )}>
                 <Icon className="h-5 w-5" />
                 <span className="text-[10px] font-medium">{item.name}</span>

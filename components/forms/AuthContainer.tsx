@@ -27,7 +27,7 @@ export function AuthContainer() {
             : 'Sudah memiliki akun? '}
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="font-medium text-emerald-600 hover:text-emerald-500"
+            className="font-medium text-blue-600 hover:text-blue-500"
           >
             {isLogin ? 'Daftar di sini' : 'Masuk di sini'}
           </button>

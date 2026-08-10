@@ -86,7 +86,7 @@ export function CreateUMKMForm({ profileId }: CreateUMKMFormProps) {
           </div>
 
           <div className="pt-4 border-t border-slate-100 flex justify-end">
-            <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 w-full sm:w-auto" disabled={isLoading}>
+            <Button type="submit" className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto" disabled={isLoading}>
               {isLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Menyimpan...</> : 'Daftarkan UMKM Sekarang'}
             </Button>
           </div>

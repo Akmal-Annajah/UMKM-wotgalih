@@ -20,7 +20,7 @@ export default async function AdminDashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-slate-600">Total UMKM</CardTitle>
-            <Store className="h-4 w-4 text-emerald-600" />
+            <Store className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-slate-900">{stats.umkm}</div>

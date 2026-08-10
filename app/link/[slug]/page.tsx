@@ -37,11 +37,11 @@ export default async function LinktreePage({ params }: { params: Promise<{ slug:
   const waLink = umkm.whatsapp ? `https://api.whatsapp.com/send?phone=${formatWA(umkm.whatsapp)}&text=${waMessage}` : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-emerald-950 to-slate-900 text-slate-50 relative overflow-hidden flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-950 to-slate-900 text-slate-50 relative overflow-hidden flex flex-col items-center">
       {/* Decorative background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-emerald-500/30 blur-[120px]" />
-        <div className="absolute top-[60%] -right-[10%] w-[60%] h-[60%] rounded-full bg-emerald-700/30 blur-[120px]" />
+        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-500/30 blur-[120px]" />
+        <div className="absolute top-[60%] -right-[10%] w-[60%] h-[60%] rounded-full bg-blue-700/30 blur-[120px]" />
       </div>
 
       <div className="relative z-10 w-full max-w-md mx-auto px-6 py-12 flex flex-col items-center">
@@ -59,7 +59,7 @@ export default async function LinktreePage({ params }: { params: Promise<{ slug:
         <h1 className="text-2xl font-bold text-center text-white mb-1">{umkm.name}</h1>
         
         {umkm.description && (
-          <p className="text-emerald-100/70 text-center text-sm mb-10 line-clamp-3">{umkm.description}</p>
+          <p className="text-blue-100/70 text-center text-sm mb-10 line-clamp-3">{umkm.description}</p>
         )}
 
         {/* Links */}
@@ -135,7 +135,7 @@ export default async function LinktreePage({ params }: { params: Promise<{ slug:
         </div>
 
         {/* Footer */}
-        <p className="mt-12 text-emerald-200/40 text-xs">UMKM Wotgalih</p>
+        <p className="mt-12 text-blue-200/40 text-xs">UMKM Wotgalih</p>
       </div>
     </div>
   );

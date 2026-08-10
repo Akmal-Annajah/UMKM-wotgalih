@@ -26,7 +26,7 @@ export default function GlobalError({
       </p>
       <Button 
         onClick={() => reset()} 
-        className="bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-600/20"
+        className="bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20"
       >
         Muat Ulang Halaman
       </Button>

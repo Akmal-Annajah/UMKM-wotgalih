@@ -25,18 +25,42 @@ export function UMKMProfileForm({ umkm }: UMKMProfileFormProps) {
     const formData = new FormData(e.currentTarget);
 
     const supabase = createClient();
+    const newName = (formData.get('name') as string).trim();
+
+    if (!newName) {
+      toast.error('Nama UMKM tidak boleh kosong.');
+      setIsLoading(false);
+      return;
+    }
+
+    // Generate slug baru jika nama berubah
+    const updateData: Record<string, string> = {
+      name: newName,
+      description: formData.get('description') as string,
+      address: formData.get('address') as string,
+      whatsapp: formData.get('whatsapp') as string,
+      instagram: formData.get('instagram') as string,
+      tiktok_url: formData.get('tiktok_url') as string,
+      shopee_url: formData.get('shopee_url') as string,
+      tokopedia_url: formData.get('tokopedia_url') as string,
+      maps_url: formData.get('maps_url') as string,
+    };
+
+    // Jika nama berubah, buat slug baru
+    if (newName !== umkm.name) {
+      const slug = newName
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .substring(0, 50);
+      const randomSuffix = Math.random().toString(36).substring(2, 5);
+      updateData.slug = `${slug}-${randomSuffix}`;
+    }
+
     const { error } = await supabase
       .from('umkms')
-      .update({
-        description: formData.get('description') as string,
-        address: formData.get('address') as string,
-        whatsapp: formData.get('whatsapp') as string,
-        instagram: formData.get('instagram') as string,
-        tiktok_url: formData.get('tiktok_url') as string,
-        shopee_url: formData.get('shopee_url') as string,
-        tokopedia_url: formData.get('tokopedia_url') as string,
-        maps_url: formData.get('maps_url') as string,
-      })
+      .update(updateData)
       .eq('id', umkm.id);
 
     setIsLoading(false);
@@ -153,6 +177,11 @@ export function UMKMProfileForm({ umkm }: UMKMProfileFormProps) {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
+              <Label htmlFor="name">Nama UMKM</Label>
+              <Input id="name" name="name" defaultValue={umkm.name || ''} placeholder="Nama usaha Anda" />
+              <p className="text-xs text-slate-500">Mengubah nama akan otomatis memperbarui link profil (slug) Anda.</p>
+            </div>
+            <div className="space-y-2">
               <Label htmlFor="description">Deskripsi</Label>
               <Textarea id="description" name="description" defaultValue={umkm.description || ''} placeholder="Ceritakan tentang usaha Anda..." rows={5} />
             </div>
@@ -183,7 +212,7 @@ export function UMKMProfileForm({ umkm }: UMKMProfileFormProps) {
               </div>
             </div>
             <div className="flex justify-end">
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700" disabled={isLoading}>
+              <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={isLoading}>
                 {isLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Menyimpan...</> : 'Simpan Perubahan'}
               </Button>
             </div>

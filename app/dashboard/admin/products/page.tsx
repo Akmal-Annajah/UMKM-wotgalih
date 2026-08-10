@@ -67,7 +67,7 @@ export default async function AdminProductsPage() {
                   <TableCell className="text-center">
                     <Badge
                       variant={product.is_available ? 'default' : 'destructive'}
-                      className={product.is_available ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-100' : ''}
+                      className={product.is_available ? 'bg-blue-100 text-blue-700 hover:bg-blue-100' : ''}
                     >
                       {product.is_available ? 'Tersedia' : 'Habis'}
                     </Badge>
