@@ -42,7 +42,8 @@ export async function registerWithEmail(data: RegisterFormData) {
       data: {
         full_name: data.fullName,
         role: 'umkm',
-      }
+      },
+      emailRedirectTo: `${window.location.origin}/auth/callback?next=/login`,
     }
   });
   
@@ -87,6 +88,15 @@ export async function requestPasswordReset(email: string) {
 export async function updatePassword(password: string) {
   const supabase = createClient();
   const { error } = await supabase.auth.updateUser({ password });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function updateEmail(email: string) {
+  const supabase = createClient();
+  const { error } = await supabase.auth.updateUser({ email });
 
   if (error) {
     throw new Error(error.message);

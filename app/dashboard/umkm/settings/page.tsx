@@ -1,7 +1,8 @@
 import { createClient } from '@/lib/supabase/server';
 import { getMyUMKM } from '@/services/umkm.service';
 import { redirect } from 'next/navigation';
-import { DeleteAccountSection } from './DeleteAccountSection';
+import { UpdateEmailForm } from './UpdateEmailForm';
+import { UpdatePasswordForm } from './UpdatePasswordForm';
 
 export const metadata = {
   title: 'Pengaturan Akun - Dashboard UMKM',
@@ -29,7 +30,7 @@ export default async function SettingsPage() {
         <h2 className="text-lg font-bold text-slate-900">Informasi Akun</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="text-slate-500">Email</p>
+            <p className="text-slate-500">Email saat ini</p>
             <p className="font-semibold text-slate-900">{user.email}</p>
           </div>
           {umkm && (
@@ -41,8 +42,9 @@ export default async function SettingsPage() {
         </div>
       </div>
 
-      {/* Danger Zone */}
-      <DeleteAccountSection umkmName={umkm?.name || null} />
+      {/* Security Actions */}
+      <UpdateEmailForm currentEmail={user.email || ''} />
+      <UpdatePasswordForm />
     </div>
   );
 }

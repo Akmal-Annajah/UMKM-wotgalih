@@ -79,7 +79,7 @@ export default async function LinktreePage({ params }: { params: Promise<{ slug:
           <div className="w-full flex flex-col gap-3">
             <Link
               href={`/umkm/${umkm.slug}`}
-              className="relative w-full h-[60px] flex items-center justify-center rounded-2xl text-[15px] font-bold transition-all duration-300 active:scale-[0.98] overflow-hidden group bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_4px_20px_rgba(249,115,22,0.25)] hover:shadow-[0_8px_30px_rgba(249,115,22,0.4)] hover:-translate-y-0.5 border border-orange-400/30"
+              className="relative w-full h-[60px] flex items-center justify-center rounded-2xl text-[15px] font-bold transition-all duration-300 active:scale-[0.98] overflow-hidden group bg-gradient-to-r from-blue-600 to-sky-500 text-white shadow-[0_4px_20px_rgba(59,130,246,0.25)] hover:shadow-[0_8px_30px_rgba(59,130,246,0.4)] hover:-translate-y-0.5 border border-blue-400/30"
             >
               <Store className="absolute left-5 h-6 w-6 shrink-0 transition-transform duration-300 group-hover:scale-110" />
               <span>Katalog Produk & Profil</span>
