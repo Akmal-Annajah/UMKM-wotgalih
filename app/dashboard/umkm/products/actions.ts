@@ -27,6 +27,7 @@ export async function createProduct(formData: FormData) {
       description: description || null,
       price,
       is_available: true,
+      image_url: formData.get('image_url') as string || null,
     });
 
   if (error) {
@@ -52,6 +53,7 @@ export async function updateProduct(productId: string, formData: FormData) {
       description: description || null,
       price,
       is_available: isAvailable,
+      ...(formData.get('image_url') ? { image_url: formData.get('image_url') as string } : {}),
     })
     .eq('id', productId);
 

@@ -32,12 +32,43 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
   const [editOpen, setEditOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error('Ukuran file maksimal 2MB.');
+        return;
+      }
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
 
   const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     formData.set('umkm_id', umkmId);
+
+    if (imageFile) {
+      const supabase = createClient();
+      const fileExt = imageFile.name.split('.').pop();
+      const fileName = `${crypto.randomUUID()}.${fileExt}`;
+      const { error: uploadError } = await supabase.storage
+        .from('products')
+        .upload(fileName, imageFile, { cacheControl: '3600', upsert: false });
+      
+      if (uploadError) {
+        toast.error('Gagal mengunggah foto: ' + uploadError.message);
+        setLoading(false);
+        return;
+      }
+      const { data } = supabase.storage.from('products').getPublicUrl(fileName);
+      formData.set('image_url', data.publicUrl);
+    }
 
     const result = await createProduct(formData);
     setLoading(false);
@@ -46,6 +77,8 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
     } else {
       toast.success('Produk berhasil ditambahkan!');
       setAddOpen(false);
+      setImageFile(null);
+      setImagePreview(null);
       router.refresh();
     }
   };
@@ -56,6 +89,23 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
 
+    if (imageFile) {
+      const supabase = createClient();
+      const fileExt = imageFile.name.split('.').pop();
+      const fileName = `${crypto.randomUUID()}.${fileExt}`;
+      const { error: uploadError } = await supabase.storage
+        .from('products')
+        .upload(fileName, imageFile, { cacheControl: '3600', upsert: false });
+      
+      if (uploadError) {
+        toast.error('Gagal mengunggah foto: ' + uploadError.message);
+        setLoading(false);
+        return;
+      }
+      const { data } = supabase.storage.from('products').getPublicUrl(fileName);
+      formData.set('image_url', data.publicUrl);
+    }
+
     const result = await updateProduct(editingProduct.id, formData);
     setLoading(false);
     if (result.error) {
@@ -64,6 +114,8 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
       toast.success('Produk berhasil diperbarui!');
       setEditOpen(false);
       setEditingProduct(null);
+      setImageFile(null);
+      setImagePreview(null);
       router.refresh();
     }
   };
@@ -113,21 +165,39 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
 
   const openEdit = (product: any) => {
     setEditingProduct(product);
+    setImageFile(null);
+    setImagePreview(product.image_url || null);
     setEditOpen(true);
   };
 
   return (
     <div className="space-y-6">
       {/* Add Product Dialog */}
-      <Dialog open={addOpen} onOpenChange={setAddOpen}>
+      <Dialog open={addOpen} onOpenChange={(v) => { setAddOpen(v); if (!v) { setImageFile(null); setImagePreview(null); } }}>
         <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => setAddOpen(true)}>
           <Plus className="mr-2 h-4 w-4" /> Tambah Produk
         </Button>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Tambah Produk Baru</DialogTitle>
           </DialogHeader>
           <form onSubmit={handleAdd} className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label>Foto Produk</Label>
+              <div className="flex items-center gap-4">
+                <div className="h-20 w-20 rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden shrink-0">
+                  {imagePreview ? (
+                    <img src={imagePreview} alt="Preview" className="h-full w-full object-cover" />
+                  ) : (
+                    <ImagePlus className="h-6 w-6 text-slate-400" />
+                  )}
+                </div>
+                <div className="flex-1">
+                  <Input type="file" accept="image/*" onChange={handleImageChange} className="cursor-pointer" />
+                  <p className="text-xs text-slate-500 mt-1">Format: JPG, PNG, dll. Maks. 2MB.</p>
+                </div>
+              </div>
+            </div>
             <div className="space-y-2">
               <Label htmlFor="add_name">Nama Produk *</Label>
               <Input id="add_name" name="name" required placeholder="Nama produk Anda" />
@@ -151,13 +221,29 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
       </Dialog>
 
       {/* Edit Product Dialog */}
-      <Dialog open={editOpen} onOpenChange={(v) => { setEditOpen(v); if (!v) setEditingProduct(null); }}>
-        <DialogContent className="sm:max-w-lg">
+      <Dialog open={editOpen} onOpenChange={(v) => { setEditOpen(v); if (!v) { setEditingProduct(null); setImageFile(null); setImagePreview(null); } }}>
+        <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Edit Produk</DialogTitle>
           </DialogHeader>
           {editingProduct && (
             <form onSubmit={handleEdit} className="space-y-4 mt-4">
+              <div className="space-y-2">
+                <Label>Foto Produk</Label>
+                <div className="flex items-center gap-4">
+                  <div className="h-20 w-20 rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden shrink-0">
+                    {imagePreview ? (
+                      <img src={imagePreview} alt="Preview" className="h-full w-full object-cover" />
+                    ) : (
+                      <ImagePlus className="h-6 w-6 text-slate-400" />
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <Input type="file" accept="image/*" onChange={handleImageChange} className="cursor-pointer" />
+                    <p className="text-xs text-slate-500 mt-1">Format: JPG, PNG, dll. Maks. 2MB. Biarkan kosong jika tidak ingin mengubah foto.</p>
+                  </div>
+                </div>
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="edit_name">Nama Produk *</Label>
                 <Input id="edit_name" name="name" required defaultValue={editingProduct.name} />

@@ -96,10 +96,10 @@ export default async function LandingPage() {
           </div>
 
           {featuredUMKMs.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
               {featuredUMKMs.map((umkm) => (
                 <Link key={umkm.id} href={`/umkm/${umkm.slug}`}>
-                  <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border-slate-200 rounded-3xl">
+                  <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl border-slate-200 rounded-2xl sm:rounded-3xl">
                     <div className="aspect-[4/3] bg-slate-100 relative">
                       {umkm.logo_url ? (
                         <img src={umkm.logo_url} alt={umkm.name} className="h-full w-full object-cover" />
@@ -109,14 +109,14 @@ export default async function LandingPage() {
                         </div>
                       )}
                     </div>
-                    <CardContent className="p-5">
+                    <CardContent className="p-3 sm:p-5">
                       {umkm.categories && (umkm.categories as any).name && (
-                        <span className="inline-block rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600 mb-3">
+                        <span className="inline-block rounded-full bg-slate-100 px-2 py-0.5 text-[10px] sm:text-xs font-medium text-slate-600 mb-2 sm:mb-3">
                           {(umkm.categories as any).name}
                         </span>
                       )}
-                      <h3 className="text-lg font-bold text-slate-900 line-clamp-1">{umkm.name}</h3>
-                      <p className="mt-2 text-sm text-slate-600 line-clamp-2">
+                      <h3 className="text-sm sm:text-lg font-bold text-slate-900 line-clamp-1">{umkm.name}</h3>
+                      <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-slate-600 line-clamp-2">
                         {umkm.description || 'UMKM Lokal Desa Wotgalih.'}
                       </p>
                     </CardContent>
@@ -149,10 +149,10 @@ export default async function LandingPage() {
         </div>
 
         {latestProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {latestProducts.map((product) => (
               <Link key={product.id} href={`/produk/${product.slug}`}>
-                <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border-slate-200 rounded-3xl group">
+                <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl border-slate-200 rounded-2xl sm:rounded-3xl group">
                   <div className="aspect-square bg-slate-100 relative overflow-hidden">
                     {product.image_url ? (
                       <img src={product.image_url} alt={product.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -162,10 +162,10 @@ export default async function LandingPage() {
                       </div>
                     )}
                   </div>
-                  <CardContent className="p-5">
-                    <p className="text-xs font-medium text-blue-600 mb-1">{(product.umkms as any)?.name}</p>
-                    <h3 className="text-lg font-bold text-slate-900 line-clamp-2">{product.name}</h3>
-                    <p className="mt-2 text-lg font-extrabold text-amber-500">
+                  <CardContent className="p-3 sm:p-5">
+                    <p className="text-[10px] sm:text-xs font-medium text-blue-600 mb-1 line-clamp-1">{(product.umkms as any)?.name}</p>
+                    <h3 className="text-sm sm:text-lg font-bold text-slate-900 line-clamp-2">{product.name}</h3>
+                    <p className="mt-1 sm:mt-2 text-base sm:text-lg font-extrabold text-amber-500">
                       Rp {new Intl.NumberFormat('id-ID').format(product.price)}
                     </p>
                   </CardContent>

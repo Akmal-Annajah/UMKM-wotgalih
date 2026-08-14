@@ -52,10 +52,10 @@ export default async function ProductListPage({
       </div>
 
       {products.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
             <Link key={product.id} href={`/produk/${product.slug}`}>
-              <Card className="h-full overflow-hidden transition-all hover:shadow-lg group border-slate-200">
+              <Card className="h-full overflow-hidden transition-all hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-lg group border-slate-200 rounded-2xl sm:rounded-3xl">
                 <div className="aspect-square bg-slate-100 relative overflow-hidden">
                   {product.image_url ? (
                     <img src={product.image_url} alt={product.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -65,12 +65,12 @@ export default async function ProductListPage({
                     </div>
                   )}
                 </div>
-                <CardContent className="p-5">
-                  <p className="text-xs font-medium text-blue-600 mb-1">
+                <CardContent className="p-3 sm:p-5">
+                  <p className="text-[10px] sm:text-xs font-medium text-blue-600 mb-1 line-clamp-1">
                     {(product.umkms as any)?.name}
                   </p>
-                  <h3 className="text-lg font-bold text-slate-900 line-clamp-2">{product.name}</h3>
-                  <p className="mt-2 text-xl font-extrabold text-amber-500">
+                  <h3 className="text-sm sm:text-lg font-bold text-slate-900 line-clamp-2">{product.name}</h3>
+                  <p className="mt-1 sm:mt-2 text-base sm:text-xl font-extrabold text-amber-500">
                     Rp {new Intl.NumberFormat('id-ID').format(product.price)}
                   </p>
                 </CardContent>
