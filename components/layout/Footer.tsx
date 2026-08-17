@@ -27,7 +27,8 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} Desa Wotgalih. All rights reserved.
+          <p>© {new Date().getFullYear()} Desa Wotgalih. All rights reserved.</p>
+          <p className="mt-1 font-medium">@Itb Widyagama Lumajang</p>
         </div>
       </div>
     </footer>
