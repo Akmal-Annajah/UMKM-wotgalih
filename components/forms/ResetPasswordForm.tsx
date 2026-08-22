@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, KeyRound, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { PasswordInput } from '@/components/ui/password-input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
@@ -90,9 +91,8 @@ export function ResetPasswordForm() {
 
           <div className="space-y-2">
             <Label htmlFor="password">Password Baru</Label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               placeholder="Minimal 6 karakter"
               {...register('password')}
               className={errors.password ? 'border-red-500' : ''}
@@ -104,9 +104,8 @@ export function ResetPasswordForm() {
 
           <div className="space-y-2">
             <Label htmlFor="confirmPassword">Konfirmasi Password</Label>
-            <Input
+            <PasswordInput
               id="confirmPassword"
-              type="password"
               placeholder="Ulangi password baru"
               {...register('confirmPassword')}
               className={errors.confirmPassword ? 'border-red-500' : ''}

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password-input';
 import { Label } from '@/components/ui/label';
 import { updatePassword } from '@/services/auth.service';
 import { KeyRound, Loader2 } from 'lucide-react';
@@ -50,11 +51,11 @@ export function UpdatePasswordForm() {
       <form onSubmit={handleSubmit} className="space-y-4 pt-2">
         <div className="space-y-2">
           <Label htmlFor="password">Password Baru</Label>
-          <Input id="password" name="password" type="password" required minLength={6} placeholder="Minimal 6 karakter" />
+          <PasswordInput id="password" name="password" required minLength={6} placeholder="Minimal 6 karakter" />
         </div>
         <div className="space-y-2">
           <Label htmlFor="confirm_password">Konfirmasi Password Baru</Label>
-          <Input id="confirm_password" name="confirm_password" type="password" required minLength={6} placeholder="Ketik ulang password baru" />
+          <PasswordInput id="confirm_password" name="confirm_password" required minLength={6} placeholder="Ketik ulang password baru" />
         </div>
         
         <Button type="submit" disabled={loading} className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white">

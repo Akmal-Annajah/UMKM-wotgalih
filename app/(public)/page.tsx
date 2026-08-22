@@ -19,15 +19,6 @@ export default async function LandingPage() {
         </div>
 
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
-          {/* Supported By Logos */}
-          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 mb-10 w-fit mx-auto">
-            <img src="/logos/logo-diktisaintek.png" alt="Diktisaintek" className="h-16 sm:h-20 md:h-24 w-auto object-contain drop-shadow-md" />
-            <img src="/logos/logo-itb-wiga.png" alt="ITB Wiga" className="h-14 sm:h-16 md:h-20 w-auto object-contain drop-shadow-md" />
-            <img src="/logos/logo-lumajang.png" alt="Lumajang" className="h-20 sm:h-24 md:h-32 w-auto object-contain drop-shadow-md" />
-            <img src="/logos/logo-kkn.png" alt="KKN Wotgalih" className="h-16 sm:h-20 md:h-24 w-auto object-contain drop-shadow-md scale-105" />
-          </div>
-
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm font-medium text-blue-300 mb-8 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
@@ -168,6 +159,11 @@ export default async function LandingPage() {
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-slate-100 text-slate-300">
                         <ShoppingBag className="h-16 w-16" />
+                      </div>
+                    )}
+                    {product.is_preorder && (
+                      <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 rounded-md bg-amber-500/90 px-1.5 py-0.5 sm:px-2 sm:py-1 text-[10px] sm:text-xs font-bold text-white backdrop-blur-sm">
+                        Pre Order
                       </div>
                     )}
                   </div>

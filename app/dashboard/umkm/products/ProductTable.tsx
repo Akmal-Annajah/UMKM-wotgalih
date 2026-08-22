@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { Plus, Pencil, Trash2, ShoppingBag, ImagePlus, Loader2 } from 'lucide-react';
+import { Plus, Pencil, Trash2, ShoppingBag, ImagePlus, Loader2, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PriceInput } from '@/components/ui/PriceInput';
@@ -34,6 +34,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isPreorder, setIsPreorder] = useState(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -52,6 +53,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     formData.set('umkm_id', umkmId);
+    formData.set('is_preorder', isPreorder ? 'true' : 'false');
 
     if (imageFile) {
       const supabase = createClient();
@@ -79,6 +81,7 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
       setAddOpen(false);
       setImageFile(null);
       setImagePreview(null);
+      setIsPreorder(false);
       router.refresh();
     }
   };
@@ -167,13 +170,14 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
     setEditingProduct(product);
     setImageFile(null);
     setImagePreview(product.image_url || null);
+    setIsPreorder(product.is_preorder || false);
     setEditOpen(true);
   };
 
   return (
     <div className="space-y-6">
       {/* Add Product Dialog */}
-      <Dialog open={addOpen} onOpenChange={(v) => { setAddOpen(v); if (!v) { setImageFile(null); setImagePreview(null); } }}>
+      <Dialog open={addOpen} onOpenChange={(v) => { setAddOpen(v); if (!v) { setImageFile(null); setImagePreview(null); setIsPreorder(false); } }}>
         <Button className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => setAddOpen(true)}>
           <Plus className="mr-2 h-4 w-4" /> Tambah Produk
         </Button>
@@ -209,6 +213,17 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
             <div className="space-y-2">
               <Label htmlFor="add_description">Deskripsi</Label>
               <Textarea id="add_description" name="description" placeholder="Deskripsi produk..." rows={4} />
+            </div>
+            <div className="flex items-center justify-between rounded-lg border border-slate-200 p-3 bg-slate-50">
+              <div className="space-y-0.5">
+                <Label htmlFor="add_preorder" className="text-sm font-medium cursor-pointer">Pre Order</Label>
+                <p className="text-xs text-slate-500">Aktifkan jika produk ini hanya bisa dipesan di awal (Pre Order).</p>
+              </div>
+              <Switch
+                id="add_preorder"
+                checked={isPreorder}
+                onCheckedChange={setIsPreorder}
+              />
             </div>
             <div className="flex justify-end gap-3 pt-4 border-t">
               <Button type="button" variant="outline" onClick={() => setAddOpen(false)}>Batal</Button>
@@ -263,6 +278,18 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
                   <option value="false">Habis</option>
                 </select>
               </div>
+              <div className="flex items-center justify-between rounded-lg border border-slate-200 p-3 bg-slate-50">
+                <div className="space-y-0.5">
+                  <Label htmlFor="edit_preorder" className="text-sm font-medium cursor-pointer">Pre Order</Label>
+                  <p className="text-xs text-slate-500">Aktifkan jika produk ini hanya bisa dipesan di awal.</p>
+                </div>
+                <Switch
+                  id="edit_preorder"
+                  checked={isPreorder}
+                  onCheckedChange={setIsPreorder}
+                />
+              </div>
+              <input type="hidden" name="is_preorder" value={isPreorder ? 'true' : 'false'} />
               <div className="flex justify-end gap-3 pt-4 border-t">
                 <Button type="button" variant="outline" onClick={() => setEditOpen(false)}>Batal</Button>
                 <Button type="submit" className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
@@ -320,9 +347,16 @@ export function ProductTable({ products, umkmId }: ProductTableProps) {
                     Rp {new Intl.NumberFormat('id-ID').format(product.price)}
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant={product.is_available ? 'default' : 'destructive'} className={product.is_available ? 'bg-blue-100 text-blue-700 hover:bg-blue-100' : ''}>
-                      {product.is_available ? 'Tersedia' : 'Habis'}
-                    </Badge>
+                    <div className="flex flex-col items-center gap-1">
+                      <Badge variant={product.is_available ? 'default' : 'destructive'} className={product.is_available ? 'bg-blue-100 text-blue-700 hover:bg-blue-100' : ''}>
+                        {product.is_available ? 'Tersedia' : 'Habis'}
+                      </Badge>
+                      {product.is_preorder && (
+                        <Badge variant="outline" className="border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-50 text-[10px]">
+                          <Clock className="mr-1 h-3 w-3" /> Pre Order
+                        </Badge>
+                      )}
+                    </div>
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">

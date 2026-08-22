@@ -22,11 +22,14 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 transition-transform hover:scale-105 z-50">
-          <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-blue-500 text-white shadow-sm">
-            <Store className="h-5 w-5 sm:h-6 sm:w-6" />
+        <Link href="/" className="flex items-center gap-2 sm:gap-3 transition-transform hover:scale-105 z-50 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 pr-2 sm:pr-3 border-r border-slate-200">
+            <img src="/logos/logo-diktisaintek.png" alt="Diktisaintek" className="h-5 sm:h-7 md:h-8 w-auto object-contain" />
+            <img src="/logos/logo-itb-wiga.png" alt="ITB Wiga" className="h-4 sm:h-6 md:h-7 w-auto object-contain" />
+            <img src="/logos/logo-lumajang.png" alt="Lumajang" className="h-6 sm:h-8 md:h-9 w-auto object-contain" />
+            <img src="/logos/logo-kkn.png" alt="KKN Wotgalih" className="h-5 sm:h-7 md:h-8 w-auto object-contain scale-105" />
           </div>
-          <span className="text-lg sm:text-xl font-bold tracking-tight text-slate-900">
+          <span className="text-sm sm:text-lg md:text-xl font-bold tracking-tight text-slate-900 leading-none">
             UMKM <span className="text-blue-600">Wotgalih</span>
           </span>
         </Link>

@@ -23,6 +23,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password-input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import {
@@ -125,7 +126,7 @@ export function UMKMTable({ umkms, categories }: UMKMTableProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password *</Label>
-                <Input id="password" name="password" type="password" required minLength={6} placeholder="Min. 6 karakter" />
+                <PasswordInput id="password" name="password" required minLength={6} placeholder="Min. 6 karakter" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="full_name">Nama Pemilik *</Label>

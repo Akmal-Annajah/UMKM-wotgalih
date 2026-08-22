@@ -64,6 +64,11 @@ export default async function ProductListPage({
                       <ShoppingBag className="h-16 w-16" />
                     </div>
                   )}
+                  {product.is_preorder && (
+                    <div className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 rounded-md bg-amber-500/90 px-1.5 py-0.5 sm:px-2 sm:py-1 text-[10px] sm:text-xs font-bold text-white backdrop-blur-sm">
+                      Pre Order
+                    </div>
+                  )}
                 </div>
                 <CardContent className="p-3 sm:p-5">
                   <p className="text-[10px] sm:text-xs font-medium text-blue-600 mb-1 line-clamp-1">

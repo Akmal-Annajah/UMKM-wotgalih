@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, CheckCircle2, Mail, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { PasswordInput } from '@/components/ui/password-input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent } from '@/components/ui/card'
 import { registerSchema, type RegisterFormData, registerWithEmail } from '@/services/auth.service'
@@ -123,9 +124,8 @@ export function RegisterForm({ onSuccess }: { onSuccess?: () => void }) {
 
           <div className="space-y-2">
             <Label htmlFor="password-register">Password</Label>
-            <Input 
+            <PasswordInput 
               id="password-register" 
-              type="password" 
               placeholder="Minimal 6 karakter"
               {...register('password')}
               className={errors.password ? 'border-red-500' : ''}
@@ -137,9 +137,8 @@ export function RegisterForm({ onSuccess }: { onSuccess?: () => void }) {
 
           <div className="space-y-2">
             <Label htmlFor="confirmPassword">Konfirmasi Password</Label>
-            <Input 
+            <PasswordInput 
               id="confirmPassword" 
-              type="password" 
               placeholder="Ulangi password"
               {...register('confirmPassword')}
               className={errors.confirmPassword ? 'border-red-500' : ''}
